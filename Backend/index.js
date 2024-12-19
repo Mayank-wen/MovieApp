@@ -70,7 +70,7 @@
 // const server = new ApolloServer({
 //     typeDefs,
 //     resolvers,
-//     validationRules: [depthLimit(5)], // Only using depth limit
+//     validationRules: [depthLimit(5)], 
 //     context: async ({ req }) => {
 //         const token = req.headers.authorization;
 //         const user = await getUser (token);
@@ -122,9 +122,9 @@ const server = new ApolloServer({
     }
 });
 
-// Create an async function to start the server
+
 const startServer = async () => {
-    await server.start(); // Await the server start
+    await server.start(); 
     server.applyMiddleware({ app, path: '/api' }); 
 
     app.listen({ port }, () =>
@@ -132,7 +132,7 @@ const startServer = async () => {
     );
 };
 
-// Call the startServer function
+
 startServer().catch(err => {
     console.error('Error starting server:', err);
 });
