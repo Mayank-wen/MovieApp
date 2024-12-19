@@ -1,6 +1,6 @@
 const md5 = require('md5');
 
-const gravatar = email => {
+const gravatar =(email) => {
   if (!email || typeof email !== 'string') {
     throw new Error('A valid email is required to generate a Gravatar URL.');
   }

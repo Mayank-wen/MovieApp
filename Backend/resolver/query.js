@@ -1,9 +1,37 @@
+// module.exports = {
+//     movies: async (parent, args, { models }) => {
+//         return await models.Movie.find().limit(100);
+//     },
+//     getMovieById: async (parent, args) => {
+//         return await models.Movie.findById(args.id);
+//     },
+//     movieFeed: async (parent, { cursor }, { models }) => {
+//         const limit = 10;
+//         let hasNextPage = false;
+//         let cursorQuery = {};
+//         if (cursor) {
+//             cursorQuery = { _id: { $lt: cursor } };
+//         } let movies = await models.Movie.find(cursorQuery)
+//         .sort({ _id: -1 })
+//         .limit(limit + 1);
+//         if (movies.length > limit) {
+//                 hasNextPage = true;
+//                 movies = movies.slice(0, -1);
+//             } const newCursor = movies[movies.length - 1]._id;
+//         return {
+//             movies,
+//             cursor: newCursor,
+//             hasNextPage
+//         };
+//     }
+// }
+
 module.exports = {
-    movies: async (parent, args, { models }) => {
+    getMovies: async (parent, args, { models }) => {
         return await models.Movie.find().limit(100);
     },
-    movie: async (parent, args) => {
-        return await models.Movie.findById(args.id);
+    getMovieById: async (parent, { id }, { models }) => { 
+        return await models.Movie.findById(id);
     },
     movieFeed: async (parent, { cursor }, { models }) => {
         const limit = 10;
@@ -11,18 +39,19 @@ module.exports = {
         let cursorQuery = {};
         if (cursor) {
             cursorQuery = { _id: { $lt: cursor } };
-        } let movies = await models.Movie.find(cursorQuery)
-        .sort({ _id: -1 })
-        .limit(limit + 1);
+        }
+        let movies = await models.Movie.find(cursorQuery)
+            .sort({ _id: -1 })
+            .limit(limit + 1);
         if (movies.length > limit) {
-                hasNextPage = true;
-                movies = movies.slice(0, -1);
-            } const newCursor = movies[movies.length - 1]._id;
+            hasNextPage = true;
+            movies = movies.slice(0, -1);
+        }
+        const newCursor = movies[movies.length - 1]._id;
         return {
-            notes,
+            movies,
             cursor: newCursor,
             hasNextPage
         };
     }
 }
-

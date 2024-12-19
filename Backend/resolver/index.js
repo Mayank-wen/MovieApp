@@ -2,11 +2,11 @@ const Query = require('./query');
 const Mutation = require('./mutation');
 const Movie = require('./movies');
 const User = require('./user');
-const { GraphQLDateTime } = require('graphql-iso-date');
+const { DateTimeResolver } = require('graphql-scalars');
 module.exports = {
 Query,
 Mutation,
 Movie,
 User,
-DateTime: GraphQLDateTime
+DateTime: DateTimeResolver
 };

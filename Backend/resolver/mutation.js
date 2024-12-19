@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose")
 const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
 require('dotenv').config();
-const gravatar = require('../util/gravatar');
+const gravatar = require('../utils/gravatar');
 module.exports = {
     signUp: async (parent, { username, email, password }, { models }) => {
         email = email.trim().toLowerCase();
@@ -67,3 +67,28 @@ module.exports = {
         }
     }
 }
+/*const signUp = async (_, { username, email, password }, { models }) => {
+  try {
+    // Check if the user already exists
+    const existingUser = await models.User.findOne({ email });
+    if (existingUser) {
+      throw new Error('User already exists');
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create the new user
+    const user = await models.User.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
+
+    return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  } catch (err) {
+    console.error(err);
+    throw new Error('Error creating account');
+  }
+};
+ */
