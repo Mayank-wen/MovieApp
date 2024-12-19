@@ -7,7 +7,7 @@
 //     id: ID!
 //     title: String!
 //     genre: String!
-//     releaseDate: DateTime!
+//     releaseDate: DateTime! // changed from String type. 
 //     description: String
 //   }
 
